@@ -7,7 +7,9 @@
  * Author     : LG
  * Create Time:
  * Change Log :
- *
+ * 
+ * loovee 9-24-2014
+ * Change all int to short, all unsigned int to unsigned short to fit some 32bit system
  * The MIT License (MIT)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,6 +30,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 #include "Barometer.h"
 #include <Wire.h>
 #include <Arduino.h>
@@ -49,6 +52,7 @@ void Barometer::init(void)
     md = bmp085ReadInt(0xBE);
     Serial.print("Temperaturet2: ");
 }
+
 // Read 1 byte from the BMP085 at 'address'
 // Return: the read byte;
 char Barometer::bmp085Read(unsigned char address)
@@ -63,10 +67,11 @@ char Barometer::bmp085Read(unsigned char address)
     while(!Wire.available());
     return Wire.read();
 }
+
 // Read 2 bytes from the BMP085
 // First byte will be from 'address'
 // Second byte will be from 'address'+1
-int Barometer::bmp085ReadInt(unsigned char address)
+short Barometer::bmp085ReadInt(unsigned char address)
 {
     unsigned char msb, lsb;
     Wire.beginTransmission(BMP085_ADDRESS);
@@ -76,19 +81,20 @@ int Barometer::bmp085ReadInt(unsigned char address)
     while(Wire.available()<2);
     msb = Wire.read();
     lsb = Wire.read();
-    return (int) msb<<8 | lsb;
+    return (short) msb<<8 | lsb;
 }
+
 // Read the uncompensated temperature value
-unsigned int Barometer::bmp085ReadUT()
+unsigned short Barometer::bmp085ReadUT()
 {
-  unsigned int ut;
-  Wire.beginTransmission(BMP085_ADDRESS);
-  Wire.write(0xF4);
-  Wire.write(0x2E);
-  Wire.endTransmission();
-  delay(5);
-  ut = bmp085ReadInt(0xF6);
-  return ut;
+    unsigned short ut;
+    Wire.beginTransmission(BMP085_ADDRESS);
+    Wire.write(0xF4);
+    Wire.write(0x2E);
+    Wire.endTransmission();
+    delay(5);
+    ut = bmp085ReadInt(0xF6);
+    return ut;
 }
 // Read the uncompensated pressure value
 unsigned long Barometer::bmp085ReadUP()
@@ -108,16 +114,18 @@ unsigned long Barometer::bmp085ReadUP()
     up = (((unsigned long) msb << 16) | ((unsigned long) lsb << 8) | (unsigned long) xlsb) >> (8-OSS);
     return up;
 }
-void Barometer::writeRegister(int deviceAddress, byte address, byte val)
+
+void Barometer::writeRegister(short deviceAddress, byte address, byte val)
 {
     Wire.beginTransmission(deviceAddress); // start transmission to device
     Wire.write(address);       // send register address
     Wire.write(val);         // send value to write
     Wire.endTransmission();     // end transmission
 }
-int Barometer::readRegister(int deviceAddress, byte address)
+
+short Barometer::readRegister(short deviceAddress, byte address)
 {
-    int v;
+    short v;
     Wire.beginTransmission(deviceAddress);
     Wire.write(address); // register to read
     Wire.endTransmission();
@@ -125,12 +133,13 @@ int Barometer::readRegister(int deviceAddress, byte address)
     Wire.requestFrom(deviceAddress, 1); // read a byte
 
     while(!Wire.available()) {
-    // waiting
+        // waiting
     }
 
     v = Wire.read();
     return v;
 }
+
 float Barometer::calcAltitude(float pressure)
 {
     float A = pressure/101325;
@@ -140,7 +149,8 @@ float Barometer::calcAltitude(float pressure)
     C = C /0.0000225577;
     return C;
 }
-float Barometer::bmp085GetTemperature(unsigned int ut)
+
+float Barometer::bmp085GetTemperature(unsigned short ut)
 {
     long x1, x2;
 
@@ -153,6 +163,7 @@ float Barometer::bmp085GetTemperature(unsigned int ut)
 
     return temp;
 }
+
 long Barometer::bmp085GetPressure(unsigned long up)
 {
     long x1, x2, x3, b3, b6, p;
