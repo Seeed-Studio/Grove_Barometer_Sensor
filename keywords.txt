@@ -1,0 +1,34 @@
+#######################################
+# Syntax Coloring Map For Seeed OLED
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+addressingMode	KEYWORD1
+SeeedGrayOled	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+bmp085GetTemperature	KEYWORD2
+bmp085GetPressure	KEYWORD2
+calcAltitude	KEYWORD2
+bmp085ReadUT	KEYWORD2
+bmp085ReadUP	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+SeeedGrayOLED	KEYWORD2
+
+
+
