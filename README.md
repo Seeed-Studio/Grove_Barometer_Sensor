@@ -1,7 +1,7 @@
 Grove_Barometer_Sensor
 --------------------------------
 
-![](https://raw.githubusercontent.com/SeeedDocument/Grove-Barometer_Sensor/master/img/Grove-Barometer.jpg)
+<img src=https://raw.githubusercontent.com/SeeedDocument/Grove-Barometer_Sensor/master/img/Grove-Barometer.jpg width=400>
 
 [](https://www.seeedstudio.com/grove-barometer-sensor-p-1199.html)
 
