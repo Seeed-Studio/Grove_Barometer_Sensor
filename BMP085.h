@@ -32,8 +32,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef __BAROMETER_H__
-#define __BAROMETER_H__
+#ifndef __BMP085_H__
+#define __BMP085_H__
 
 #include <Arduino.h>
 #include <Wire.h>
@@ -41,7 +41,7 @@
 const unsigned char OSS = 0;
 #define BMP085_ADDRESS 0x77
 
-class Barometer
+class BMP085
 {
     public:
     void init(void);

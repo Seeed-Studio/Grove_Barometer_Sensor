@@ -28,13 +28,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "Barometer.h"
+#include "BMP085.h"
 #include <Wire.h>
 float temperature;
 float pressure;
 float atm;
 float altitude;
-Barometer myBarometer;
+BMP085 myBarometer;
 void setup(){
   Serial.begin(9600);
   myBarometer.init();

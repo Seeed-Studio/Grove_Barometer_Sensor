@@ -31,11 +31,11 @@
  * THE SOFTWARE.
  */
 
-#include "Barometer.h"
+#include "BMP085.h"
 #include <Wire.h>
 #include <Arduino.h>
 
-void Barometer::init(void)
+void BMP085::init(void)
 {
     Wire.begin();
     Serial.print("Temperaturet: ");
@@ -55,7 +55,7 @@ void Barometer::init(void)
 
 // Read 1 byte from the BMP085 at 'address'
 // Return: the read byte;
-char Barometer::bmp085Read(unsigned char address)
+char BMP085::bmp085Read(unsigned char address)
 {
     //Wire.begin();
     unsigned char data;
@@ -71,7 +71,7 @@ char Barometer::bmp085Read(unsigned char address)
 // Read 2 bytes from the BMP085
 // First byte will be from 'address'
 // Second byte will be from 'address'+1
-short Barometer::bmp085ReadInt(unsigned char address)
+short BMP085::bmp085ReadInt(unsigned char address)
 {
     unsigned char msb, lsb;
     Wire.beginTransmission(BMP085_ADDRESS);
@@ -85,7 +85,7 @@ short Barometer::bmp085ReadInt(unsigned char address)
 }
 
 // Read the uncompensated temperature value
-unsigned short Barometer::bmp085ReadUT()
+unsigned short BMP085::bmp085ReadUT()
 {
     unsigned short ut;
     Wire.beginTransmission(BMP085_ADDRESS);
@@ -97,7 +97,7 @@ unsigned short Barometer::bmp085ReadUT()
     return ut;
 }
 // Read the uncompensated pressure value
-unsigned long Barometer::bmp085ReadUP()
+unsigned long BMP085::bmp085ReadUP()
 {
     unsigned char msb, lsb, xlsb;
     unsigned long up = 0;
@@ -115,7 +115,7 @@ unsigned long Barometer::bmp085ReadUP()
     return up;
 }
 
-void Barometer::writeRegister(short deviceAddress, byte address, byte val)
+void BMP085::writeRegister(short deviceAddress, byte address, byte val)
 {
     Wire.beginTransmission(deviceAddress); // start transmission to device
     Wire.write(address);       // send register address
@@ -123,7 +123,7 @@ void Barometer::writeRegister(short deviceAddress, byte address, byte val)
     Wire.endTransmission();     // end transmission
 }
 
-short Barometer::readRegister(short deviceAddress, byte address)
+short BMP085::readRegister(short deviceAddress, byte address)
 {
     short v;
     Wire.beginTransmission(deviceAddress);
@@ -140,7 +140,7 @@ short Barometer::readRegister(short deviceAddress, byte address)
     return v;
 }
 
-float Barometer::calcAltitude(float pressure)
+float BMP085::calcAltitude(float pressure)
 {
     float A = pressure/101325;
     float B = 1/5.25588;
@@ -150,7 +150,7 @@ float Barometer::calcAltitude(float pressure)
     return C;
 }
 
-float Barometer::bmp085GetTemperature(unsigned short ut)
+float BMP085::bmp085GetTemperature(unsigned short ut)
 {
     long x1, x2;
 
@@ -164,7 +164,7 @@ float Barometer::bmp085GetTemperature(unsigned short ut)
     return temp;
 }
 
-long Barometer::bmp085GetPressure(unsigned long up)
+long BMP085::bmp085GetPressure(unsigned long up)
 {
     long x1, x2, x3, b3, b6, p;
     unsigned long b4, b7;
