@@ -4,12 +4,12 @@ Grove_Barometer_Sensor
 
 <img src=https://statics3.seeedstudio.com/images/product/groveBarometer%20Sensor.jpg width=300><img src=https://statics3.seeedstudio.com/product/groveBarometer%20Sensor_01.jpg width=300>
 
-[***Grove - Barometer Sensor(BMP085)***](https://www.seeedstudio.com/Grove-Barometer-Sensor-p-1199.html)
+[Grove - Barometer Sensor(BMP085)](https://www.seeedstudio.com/Grove-Barometer-Sensor-p-1199.html)
 
 
 <img src=https://statics3.seeedstudio.com/images/product/Grove%20Barometer%20Sensor%20BMP180.jpg width=300><img src=https://statics3.seeedstudio.com/product/Grove%20Barometer%20Sensor%20BMP180_02.jpg width=300>
 
-[***Grove - Barometer Sensor(BMP180)***](https://www.seeedstudio.com/s/Grove-Barometer-Sensor-(BMP180)-p-1840.html)
+[Grove - Barometer Sensor(BMP180](https://www.seeedstudio.com/s/Grove-Barometer-Sensor-(BMP180)-p-1840.html)
 
 
 The Grove-Barometer Sensor(BMP085) features a Bosch BMP085 high-accuracy chip to detect barometric pressure and temperature. It can widely measure pressure ranging from 300hPa to 1100hPa, AKA +9000m to -500m above sea level, with a super high accuracy of 0.03hPa(0.25m) in ultra-high resolution mode.
