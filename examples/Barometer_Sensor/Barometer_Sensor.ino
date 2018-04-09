@@ -37,6 +37,7 @@ float altitude;
 BMP085 myBarometer;
 void setup(){
   Serial.begin(9600);
+  while(!Serial);
   myBarometer.init();
 
 }
@@ -45,12 +46,19 @@ void loop()
 {
    temperature = myBarometer.bmp085GetTemperature(myBarometer.bmp085ReadUT()); //Get the temperature, bmp085ReadUT MUST be called first
    pressure = myBarometer.bmp085GetPressure(myBarometer.bmp085ReadUP());//Get the temperature
-   altitude = myBarometer.calcAltitude(pressure); //Uncompensated caculation - in Meters
+   
+   /*
+    To specify a more accurate altitude, enter the correct mean sea level
+    pressure level.  For example, if the current pressure level is 1019.00 hPa
+    enter 101900 since we include two decimal places in the integer value。
+   */
+   altitude = myBarometer.calcAltitude(101900); 
+   
    atm = pressure / 101325;
 
   Serial.print("Temperature: ");
   Serial.print(temperature, 2); //display 2 decimal places
-  Serial.println("deg C");
+  Serial.println(" Celsius");
 
   Serial.print("Pressure: ");
   Serial.print(pressure, 0); //whole number only.

@@ -48,7 +48,7 @@ class BMP085
     long PressureCompensate;
     float bmp085GetTemperature(unsigned short ut);
     long bmp085GetPressure(unsigned long up);
-    float calcAltitude(float pressure);
+    float calcAltitude(float seaLevelPressure=101325);
     unsigned short bmp085ReadUT(void);
     unsigned long bmp085ReadUP(void);
 

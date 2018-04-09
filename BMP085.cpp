@@ -34,11 +34,11 @@
 #include "BMP085.h"
 #include <Wire.h>
 #include <Arduino.h>
+#include <math.h>
 
 void BMP085::init(void)
 {
     Wire.begin();
-    Serial.print("Temperaturet: ");
     ac1 = bmp085ReadInt(0xAA);
     ac2 = bmp085ReadInt(0xAC);
     ac3 = bmp085ReadInt(0xAE);
@@ -50,15 +50,12 @@ void BMP085::init(void)
     mb = bmp085ReadInt(0xBA);
     mc = bmp085ReadInt(0xBC);
     md = bmp085ReadInt(0xBE);
-    Serial.print("Temperaturet2: ");
 }
 
 // Read 1 byte from the BMP085 at 'address'
 // Return: the read byte;
 char BMP085::bmp085Read(unsigned char address)
 {
-    //Wire.begin();
-    unsigned char data;
     Wire.beginTransmission(BMP085_ADDRESS);
     Wire.write(address);
     Wire.endTransmission();
@@ -140,14 +137,12 @@ short BMP085::readRegister(short deviceAddress, byte address)
     return v;
 }
 
-float BMP085::calcAltitude(float pressure)
+float BMP085::calcAltitude(float seaLevelPressure)
 {
-    float A = pressure/101325;
-    float B = 1/5.25588;
-    float C = pow(A,B);
-    C = 1 - C;
-    C = C /0.0000225577;
-    return C;
+    float pressure = bmp085GetPressure(bmp085ReadUP());//Get the temperature
+    float altitude = 44330.0 * (1.0 - pow(pressure / seaLevelPressure, 0.1903));
+
+    return altitude;
 }
 
 float BMP085::bmp085GetTemperature(unsigned short ut)
