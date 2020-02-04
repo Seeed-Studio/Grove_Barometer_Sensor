@@ -1,4 +1,4 @@
-Grove_Barometer_Sensor
+Grove_Barometer_Sensor  [![Build Status](https://travis-ci.com/Seeed-Studio/Grove_Barometer_Sensor.svg?branch=master)](https://travis-ci.com/Seeed-Studio/Grove_Barometer_Sensor)
 --------------------------------
 
 This Arduino librarry is for Grove - Barometer Sensor(BMP085) and Grove - Barometer Sensor(BMP180).
